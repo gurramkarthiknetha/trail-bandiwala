@@ -1,0 +1,11 @@
+framework module telephony {
+  umbrella header "telephony-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module telephony.Swift {
+  header "telephony-Swift.h"
+  requires objc
+}

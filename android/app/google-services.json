@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "637530699136",
+    "firebase_url": "https://bandiwala-2025-default-rtdb.firebaseio.com",
+    "project_id": "bandiwala-2025",
+    "storage_bucket": "bandiwala-2025.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637530699136:android:0c4878365dbb70cd243d65",
+        "android_client_info": {
+          "package_name": "com.example.bandiwala"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637530699136-aqr5cv7nltuogfek23ovuqt4s2eoghg1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUpTbdBmHiztEQY6O5WxIhl2bk6PcV5Vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637530699136-aqr5cv7nltuogfek23ovuqt4s2eoghg1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "637530699136-8ugpj0k0p9mfoi6ej16h27un0gn5lpdv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bandiwala"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:637530699136:android:fb7d78e5bb33fac5243d65",
+        "android_client_info": {
+          "package_name": "com.example.phone_auth_firebase_tutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "637530699136-aqr5cv7nltuogfek23ovuqt4s2eoghg1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUpTbdBmHiztEQY6O5WxIhl2bk6PcV5Vw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "637530699136-aqr5cv7nltuogfek23ovuqt4s2eoghg1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "637530699136-8ugpj0k0p9mfoi6ej16h27un0gn5lpdv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bandiwala"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
