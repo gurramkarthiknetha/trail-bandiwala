@@ -1,54 +1,102 @@
+import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 class AuthService {
   static final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
   static String verifyId = "";
-  // to sent and otp to user
+  static DateTime? _lastOtpRequest;
+  static const _otpCooldown = Duration(minutes: 2);
+
+  static Future<bool> _canRequestOtp() async {
+    if (_lastOtpRequest == null) return true;
+    return DateTime.now().difference(_lastOtpRequest!) >= _otpCooldown;
+  }
+
+  static String _getErrorMessage(String code) {
+    switch (code) {
+      case 'too-many-requests':
+        return 'Too many attempts. Please try again after some time.';
+      case 'invalid-phone-number':
+        return 'Invalid phone number format.';
+      case 'internal-error':
+        return 'Service temporarily unavailable. Please try again.';
+      default:
+        return 'An error occurred. Please try again.';
+    }
+  }
+
   static Future sentOtp({
     required String phone,
     required Function errorStep,
     required Function nextStep,
   }) async {
-    await _firebaseAuth
-        .verifyPhoneNumber(
-      timeout: Duration(seconds: 30),
-      phoneNumber: "+91$phone",
-      verificationCompleted: (phoneAuthCredential) async {
+    try {
+      if (!await _canRequestOtp()) {
+        errorStep();
         return;
-      },
-      verificationFailed: (error) async {
-        return;
-      },
-      codeSent: (verificationId, forceResendingToken) async {
-        verifyId = verificationId;
-        nextStep();
-      },
-      codeAutoRetrievalTimeout: (verificationId) async {
-        return;
-      },
-    )
-        .onError((error, stackTrace) {
+      }
+
+      _lastOtpRequest = DateTime.now();
+
+      if (kDebugMode) {
+        print("Sending OTP to +91$phone");
+      }
+
+      await _firebaseAuth.verifyPhoneNumber(
+        phoneNumber: "+91$phone",
+        timeout: const Duration(seconds: 60),
+        verificationCompleted: (PhoneAuthCredential credential) async {
+          try {
+            final result = await _firebaseAuth.signInWithCredential(credential);
+            if (result.user != null) {
+              nextStep();
+            } else {
+              errorStep();
+            }
+          } catch (e) {
+            print("Auto verification error: $e");
+            errorStep();
+          }
+        },
+        verificationFailed: (FirebaseAuthException e) {
+          print("Verification failed: ${e.code} - ${e.message}");
+          String errorMessage = _getErrorMessage(e.code);
+          errorStep();
+        },
+        codeSent: (String verificationId, int? resendToken) {
+          verifyId = verificationId;
+          nextStep();
+        },
+        codeAutoRetrievalTimeout: (String verificationId) {
+          verifyId = verificationId;
+        },
+      );
+    } catch (e) {
+      print("Error in sentOtp: $e");
       errorStep();
-    });
+    }
   }
 
-  // verify the otp code and login
-  static Future loginWithOtp({required String otp}) async {
-    final cred =
-        PhoneAuthProvider.credential(verificationId: verifyId, smsCode: otp);
-
+  static Future<String> loginWithOtp({required String otp}) async {
     try {
-      final user = await _firebaseAuth.signInWithCredential(cred);
-      if (user.user != null) {
-        return "Success";
-      } else {
-        return "Error in Otp login";
-      }
+      final credential = PhoneAuthProvider.credential(
+        verificationId: verifyId,
+        smsCode: otp,
+      );
+
+      final result = await _firebaseAuth.signInWithCredential(credential);
+      return result.user != null ? "Success" : "Failed to verify OTP";
     } on FirebaseAuthException catch (e) {
-      return e.message.toString();
+      if (kDebugMode) {
+        print("Firebase Auth Exception: ${e.message}");
+      }
+      return e.message ?? "An error occurred";
     } catch (e) {
-      return e.toString();
+      if (kDebugMode) {
+        print("Error in loginWithOtp: $e");
+      }
+      return "An unexpected error occurred";
     }
   }
 

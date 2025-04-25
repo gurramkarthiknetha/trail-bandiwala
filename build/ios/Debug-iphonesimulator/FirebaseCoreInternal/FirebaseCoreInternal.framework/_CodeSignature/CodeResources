@@ -26,11 +26,11 @@
 		</data>
 		<key>Modules/FirebaseCoreInternal.swiftmodule/Project/arm64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		WgDj48OiCHj+HnVSj7/j5FgYKFU=
+		Glv+49m5li8A16mPMvz33C/AM4c=
 		</data>
 		<key>Modules/FirebaseCoreInternal.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<data>
-		SUU5eC1T/05tLPKMDWv3lzLLD68=
+		F7SD8iGg6v9uaaNb2gA7+01KhgE=
 		</data>
 		<key>Modules/FirebaseCoreInternal.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -42,7 +42,7 @@
 		</data>
 		<key>Modules/FirebaseCoreInternal.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		K7JWGpBHSv4TyQj0Vi1BXQjlmfI=
+		PNhaSTuwd6WKEf5wQdCpV0EB854=
 		</data>
 		<key>Modules/FirebaseCoreInternal.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Modules/FirebaseCoreInternal.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		Yw52m25cCgLXHaQ9MclGm6rXcY0=
+		S0abAi6eByDrfFZUNjPSm2Bp3V8=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -95,14 +95,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			5sTpvizHazs8MF5Yawyofmzg3tI98ppfU9SWwEd6uAw=
+			uLC8vVF3wM3Iw1dSx+fLJZZPsvXlgtjulAw3b93SNvA=
 			</data>
 		</dict>
 		<key>Modules/FirebaseCoreInternal.swiftmodule/Project/x86_64-apple-ios-simulator.swiftsourceinfo</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2XyhichHWTc8ey3xedROcS85sM5mP5SLLh0pa6Ml3m4=
+			irF9o2TSrc9Go9tAnquln4/YnYhTAaxWeNnG5JmGkv4=
 			</data>
 		</dict>
 		<key>Modules/FirebaseCoreInternal.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
@@ -123,7 +123,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			+e5eV/OyYB8vuMmwa3Uo6qSM24TYoYDJRmqQK4aRxL0=
+			RLpuRJ7wzpU3vDg5PXc9Q3pyfkaAt9oPU8g1GCsl0CA=
 			</data>
 		</dict>
 		<key>Modules/FirebaseCoreInternal.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
@@ -144,7 +144,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			eJSgfqQoXTMzyTUyMtPI8yKJUruSNtGl/aZuJy9OG6E=
+			D11NwEkybMJsJ6gaNZKeM0Z6UhT5bPbKrN2Mdg6Ucpg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

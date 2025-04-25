@@ -73,13 +73,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyDNko1PrMK-r2b1Kd8kkMok7nMK8X-hw6E',
-    appId: '1:637530699136:ios:05e74c2d84e3708a243d65',
+    appId: '1:637530699136:ios:34a97d6188c347b2243d65',
     messagingSenderId: '637530699136',
     projectId: 'bandiwala-2025',
     databaseURL: 'https://bandiwala-2025-default-rtdb.firebaseio.com',
     storageBucket: 'bandiwala-2025.firebasestorage.app',
-    iosClientId: '637530699136-hrnhh42il334sni1k9njsrjbch9b1b4c.apps.googleusercontent.com',
-    iosBundleId: 'com.example.phoneAuthFirebaseTutorial',
+    iosClientId: '637530699136-8ugpj0k0p9mfoi6ej16h27un0gn5lpdv.apps.googleusercontent.com',
+    iosBundleId: 'com.example.bandiwala',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(

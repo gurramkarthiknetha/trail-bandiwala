@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>637530699136-hrnhh42il334sni1k9njsrjbch9b1b4c.apps.googleusercontent.com</string>
+	<string>637530699136-8ugpj0k0p9mfoi6ej16h27un0gn5lpdv.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.637530699136-hrnhh42il334sni1k9njsrjbch9b1b4c</string>
+	<string>com.googleusercontent.apps.637530699136-8ugpj0k0p9mfoi6ej16h27un0gn5lpdv</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDNko1PrMK-r2b1Kd8kkMok7nMK8X-hw6E</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.phoneAuthFirebaseTutorial</string>
+	<string>com.example.bandiwala</string>
 	<key>PROJECT_ID</key>
 	<string>bandiwala-2025</string>
 	<key>STORAGE_BUCKET</key>
@@ -28,8 +28,14 @@
 	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
+	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
+	<true/>
+	<key>FIREBASE_ANALYTICS_COLLECTION_DEACTIVATED</key>
+	<false/>
+	<key>FirebaseScreenReportingEnabled</key>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:637530699136:ios:05e74c2d84e3708a243d65</string>
+	<string>1:637530699136:ios:34a97d6188c347b2243d65</string>
 	<key>DATABASE_URL</key>
 	<string>https://bandiwala-2025-default-rtdb.firebaseio.com</string>
 </dict>
