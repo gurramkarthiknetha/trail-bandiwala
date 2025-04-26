@@ -78,14 +78,13 @@ class _LoginPageState extends State<LoginPage> {
       try {
         await AuthService.sentOtp(
             phone: _phoneController.text,
-            errorStep: () {
+            errorStep: (String errorMessage) {
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                content: Text("Please wait before requesting another OTP",
-                    style: TextStyle(color: Colors.white)),
+                content:
+                    Text(errorMessage, style: TextStyle(color: Colors.white)),
                 backgroundColor: Colors.red,
                 duration: Duration(seconds: 3),
               ));
-              Navigator.pop(context);
             },
             nextStep: () {
               listenToIncomingSMS(context);

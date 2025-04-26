@@ -33,65 +33,95 @@ class AuthService {
   }) async {
     try {
       if (!await _canRequestOtp()) {
-        errorStep();
+        errorStep("Please wait before requesting another OTP");
         return;
       }
 
       _lastOtpRequest = DateTime.now();
 
-      if (kDebugMode) {
-        print("Sending OTP to +91$phone");
-      }
+      // Disable reCAPTCHA verification for all platforms
+      _firebaseAuth.setSettings(appVerificationDisabledForTesting: true);
 
       await _firebaseAuth.verifyPhoneNumber(
         phoneNumber: "+91$phone",
-        timeout: const Duration(seconds: 60),
+        timeout: const Duration(seconds: 120), // Increase timeout to 2 minutes
+        forceResendingToken: null,
         verificationCompleted: (PhoneAuthCredential credential) async {
           try {
-            final result = await _firebaseAuth.signInWithCredential(credential);
-            if (result.user != null) {
-              nextStep();
-            } else {
-              errorStep();
+            // This callback is triggered on Android when auto-verification happens
+            await _firebaseAuth.signInWithCredential(credential);
+            if (kDebugMode) {
+              print("Auto verification completed");
             }
+            nextStep();
           } catch (e) {
-            print("Auto verification error: $e");
-            errorStep();
+            if (kDebugMode) {
+              print("Error in auto verification: $e");
+            }
+            errorStep("Auto verification failed. Please enter OTP manually.");
           }
         },
         verificationFailed: (FirebaseAuthException e) {
-          print("Verification failed: ${e.code} - ${e.message}");
+          if (kDebugMode) {
+            print("Verification failed: ${e.code} - ${e.message}");
+          }
           String errorMessage = _getErrorMessage(e.code);
-          errorStep();
+          errorStep(errorMessage);
         },
         codeSent: (String verificationId, int? resendToken) {
+          if (kDebugMode) {
+            print("OTP sent successfully. Verification ID: $verificationId");
+          }
           verifyId = verificationId;
           nextStep();
         },
         codeAutoRetrievalTimeout: (String verificationId) {
+          if (kDebugMode) {
+            print("Auto retrieval timeout. Verification ID: $verificationId");
+          }
           verifyId = verificationId;
         },
       );
     } catch (e) {
-      print("Error in sentOtp: $e");
-      errorStep();
+      if (kDebugMode) {
+        print("Error in sentOtp: $e");
+      }
+      errorStep("An unexpected error occurred");
     }
   }
 
   static Future<String> loginWithOtp({required String otp}) async {
     try {
+      // Make sure verification ID is not empty
+      if (verifyId.isEmpty) {
+        return "Verification ID is missing. Please request OTP again.";
+      }
+
+      // Create credential with verification ID and OTP
       final credential = PhoneAuthProvider.credential(
         verificationId: verifyId,
         smsCode: otp,
       );
 
+      // Sign in with the credential
       final result = await _firebaseAuth.signInWithCredential(credential);
       return result.user != null ? "Success" : "Failed to verify OTP";
     } on FirebaseAuthException catch (e) {
       if (kDebugMode) {
-        print("Firebase Auth Exception: ${e.message}");
+        print("Firebase Auth Exception: ${e.code} - ${e.message}");
       }
-      return e.message ?? "An error occurred";
+
+      // Handle specific error codes
+      switch (e.code) {
+        case 'invalid-verification-code':
+          return "The OTP you entered is invalid. Please check and try again.";
+        case 'invalid-verification-id':
+          return "Session expired. Please request a new OTP.";
+        case 'session-expired':
+          return "OTP session expired. Please request a new OTP.";
+        default:
+          return e.message ?? "An error occurred";
+      }
     } catch (e) {
       if (kDebugMode) {
         print("Error in loginWithOtp: $e");
